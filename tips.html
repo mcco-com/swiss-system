@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>نصائح شطرنجية</title>
+<style>
+:root{
+  --dark:#64442c; --light:#f0d4ac; --bg:#3a2719;
+  --card:#4b3422; --panel:#5a3d27; --text:#f7e8d3;
+  --muted:#d8c0a1; --accent:#f0d4ac;
+  --gold:#ffd700; --blue:#6495ed; --green:#50c878;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+    url('assets/fonts/MaterialIcons-Regular.woff') format('woff');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+body{
+  font-family:system-ui,Segoe UI,Arial;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:20px;
+  line-height:1.6;
+  background-image: 
+      radial-gradient(circle at 20% 80%, rgba(240,212,172,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,212,172,0.12) 0%, transparent 50%);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .4s ease, transform 1s ease-in-out;
+}
+
+body.loaded{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1, .subtitle, .tip-card, .search-box, .filter-buttons, .favorites-section, footer {
+  opacity:0;
+  transform:translateY(25px);
+  filter:blur(4px);
+  transition:
+    opacity 0.1s ease,
+    transform 0.1s ease,
+    filter 1s ease;
+}
+
+body.loaded h1,
+body.loaded .subtitle,
+body.loaded .tip-card,
+body.loaded .search-box,
+body.loaded .filter-buttons,
+body.loaded .favorites-section,
+body.loaded footer{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
+
+h1{ transition-delay: .2s; }
+.subtitle{ transition-delay: .35s; }
+.search-box{ transition-delay: .45s; }
+.tip-card{ transition-delay: .5s; }
+.filter-buttons{ transition-delay:.6s; }
+.favorites-section{ transition-delay:.7s; }
+footer{ transition-delay:1s; }
+
+.container{max-width:800px;margin:0 auto;}
+
+.card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(90, 61, 39, 0.4), rgba(58, 39, 25, 0.4));
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+input,select,button{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.08);
+  color:inherit;
+  padding:8px 10px;
+  border-radius:8px;
+  font-family:inherit;
+}
+input::placeholder{color:var(--muted)}
+button{cursor:pointer;transition:all 0.3s ease;}
+
+.title-wrapper{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+
+h1{
+  font-size:30px;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin:0;
+}
+
+.subtitle{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+/* Tip Card Styles */
+.tip-card {
+  background: linear-gradient(145deg, rgba(75, 52, 34, 0.8), rgba(58, 39, 25, 0.9));
+  padding: 30px 25px 25px;
+  border-radius: 15px;
+  margin: 30px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(240, 212, 172, 0.2);
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+}
+
+.tip-content {
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: center;
+  padding: 15px;
+  font-style: italic;
+  color: var(--text);
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+.tip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tip-index {
+  background: rgba(240, 212, 172, 0.15);
+  color: var(--accent);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.tip-category {
+  background: rgba(100, 68, 44, 0.6);
+  color: var(--accent);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* تصميم جديد للأزرار - فقط أيقونات بدون خلفيات */
+.tip-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(240, 212, 172, 0.1);
+  gap: 20px;
+}
+
+.control-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  border: none;
+  font-size: 22px;
+  transition: all 0.3s ease;
+  background: transparent;
+  position: relative;
+  border-radius: 50%;
+}
+
+.control-btn:hover {
+  color: var(--text);
+  background: rgba(240, 212, 172, 0.1);
+  transform: translateY(-2px);
+}
+
+.control-btn.favorite {
+  color: var(--gold);
+}
+
+.control-btn.favorite.active {
+  color: var(--gold);
+}
+
+.control-btn.copy {
+  color: var(--accent);
+}
+
+.control-btn.share {
+  color: var(--accent);
+}
+
+.control-btn.bookmark {
+  color: var(--accent);
+}
+
+/* عداد المفضلة فوق الأيقونة */
+.favorite-badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  background: var(--accent); 
+  color: var(--dark);
+  font-size: 16px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Search Box */
+.search-box {
+  position: relative;
+  margin: 25px 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(75, 52, 34, 0.95);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius:15px;
+  border: 1px solid rgba(240, 212, 172, 0.3);
+  border-top: none;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.search-result-item {
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(240, 212, 172, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.search-result-item.show {
+  animation: appearItem 0.4s forwards;
+}
+
+.search-result-item.hide {
+  animation: disappearItem 0.3s forwards;
+}
+
+@keyframes appearItem {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes disappearItem {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+}
+
+.search-result-item:hover {
+  background: rgba(240, 212, 172, 0.15);
+  padding-right: 20px;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-tip {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.search-result-category {
+  font-size: 11px;
+  color: var(--accent);
+  background: rgba(100, 68, 44, 0.6);
+  padding: 2px 8px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.no-search-results {
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 15px 20px 15px 50px;
+  font-size: 16px;
+  background: rgba(75, 52, 34, 0.6);
+  border: 2px solid rgba(240, 212, 172, 0.2);
+  transition: all 0.3s ease;
+  border-radius: 40px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  pointer-events: none;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.filter-btn {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background-color: rgba(90, 61, 39, 0.5);
+  border: 1px solid rgba(240, 212, 172, 0.2);
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  backdrop-filter: blur(5px);
+}
+
+.filter-btn:hover {
+  background: rgba(100, 68, 44, 0.7);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--dark);
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(240, 212, 172, 0.3);
+}
+
+/* Favorites Section */
+.favorites-section {
+  margin-top: 40px;
+  display: none;
+}
+
+.favorites-section h3 {
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.favorite-item {
+  background: rgba(75, 52, 34, 0.6);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(240, 212, 172, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.favorite-item:hover {
+  background: rgba(75, 52, 34, 0.8);
+  border-color: rgba(240, 212, 172, 0.3);
+  transform: translateX(-5px);
+}
+
+.favorite-item .favorite-tip {
+  font-style: italic;
+  margin-bottom: 5px;
+  line-height: 1.6;
+}
+
+.favorite-item .favorite-category {
+  font-size: 12px;
+  color: var(--accent);
+  background: rgba(100, 68, 44, 0.6);
+  padding: 3px 10px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.remove-favorite {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(220, 53, 69, 0.2);
+  color: #dc3545;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-favorite:hover {
+  background: rgba(220, 53, 69, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.no-favorites {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* زر العودة في قسم المفضلة */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  background: rgba(100, 68, 44, 0.6);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(100, 68, 44, 0.8);
+  transform: translateX(-5px);
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: var(--muted);
+  font-style: italic;
+  display: none;
+}
+
+footer{margin-top:60px;color:var(--muted);font-size:14px;text-align:center;}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(75, 52, 34, 0.95);
+  backdrop-filter: blur(10px);
+  color: var(--accent);
+  padding: 15px 30px;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(240, 212, 172, 0.3);
+  z-index: 1000;
+  opacity: 0;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  max-width: 90%;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.toast.show {
+  display: flex;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Animations */
+.tip-content.exit-left {
+  animation: exitLeft 0.4s ease forwards;
+}
+
+.tip-content.enter-right {
+  animation: enterRight 0.4s ease forwards;
+}
+
+@keyframes exitLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes enterRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* أنيميشن للأزرار */
+.spin {
+  animation: spin 0.6s linear;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.pop {
+  animation: pop 0.3s ease forwards;
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.shake {
+  animation: copyShake 0.4s ease;
+}
+@keyframes copyShake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+.bounce {
+  animation: bookmarkBounce 0.5s ease;
+}
+@keyframes bookmarkBounce {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+  50% { transform: translateY(0); }
+  70% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+/* تصميم متجاوب */
+@media(max-width:768px){
+  h1{font-size:22px;}
+  .tip-content{font-size:16px;padding:10px;}
+  .tip-card{padding:20px 15px 15px;min-height:180px;}
+  .search-box input{padding:12px 45px 12px 15px;}
+  .filter-buttons{gap: 5px;}
+  .filter-btn{padding: 6px 10px; font-size: 12px;}
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .tip-controls {
+    gap: 15px;
+  }
+  .favorite-badge {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="title-wrapper">
+      <h1 id="pageTitle">نصائح شطرنجية</h1>
+    </div>
+    <p class="subtitle" id="pageSubtitle">احصل على نصائح لتحسين مهاراتك الشطرنجية - نصيحة واحدة في كل مرة</p>
+    
+    <!-- Search Box -->
+    <div class="search-box">
+      <span class="search-icon material-icons">search</span>
+      <input type="text" id="searchInput" placeholder="ابحث في النصائح...">
+      <div class="search-results" id="searchResults">
+        <!-- ستظهر النتائج هنا ديناميكياً -->
+      </div>
+    </div>
+    
+    <!-- Filter Buttons -->
+    <div class="filter-buttons" id="filterButtons">
+      <button class="filter-btn active" data-category="all">الكل</button>
+      <!-- سيتم ملؤها ديناميكياً -->
+    </div>
+    
+    <!-- Tip Card -->
+    <div class="tip-card">
+      <div class="tip-header">
+        <div class="tip-index" id="tipIndex">#1</div>
+        <div class="tip-category" id="tipCategory">اقتباس</div>
+      </div>
+      <div class="tip-content" id="tipContent">
+        ♚ لا يوجد فوز بدون خطة. – نيمزوفيتش
+      </div>
+      
+      <!-- أزرار التحكم تحت النصيحة -->
+      <div class="tip-controls">
+        <button class="control-btn" id="nextTipBtn" title="نصيحة جديدة">
+          <span class="material-icons">chevron_right</span>
+        </button>
+        
+        <button class="control-btn favorite" id="favoriteBtn" title="إضافة إلى المفضلة">
+          <span class="material-icons">star_border</span>
+        </button>
+        
+        <button class="control-btn copy" id="copyBtn" title="نسخ النصيحة">
+          <span class="material-icons">content_copy</span>
+        </button>
+        
+        <button class="control-btn share" id="shareBtn" title="مشاركة النصيحة">
+          <span class="material-icons">share</span>
+        </button>
+        
+        <button class="control-btn bookmark" id="favoritesToggleBtn" title="عرض المفضلة">
+          <span class="material-icons">bookmark</span>
+          <div class="favorite-badge" id="favoriteBadge">0</div>
+        </button>
+      </div>
+    </div>
+    
+    <!-- No Results Message -->
+    <div class="no-results" id="noResults">
+      <span class="material-icons" style="font-size: 60px; margin-bottom: 15px;">search_off</span>
+      <h3>لا توجد نتائج</h3>
+      <p>لم نتمكن من العثور على نصائح تطابق بحثك. حاول بكلمات أخرى.</p>
+    </div>
+    
+    <!-- Favorites Section -->
+    <div class="favorites-section" id="favoritesSection">
+      <button class="back-btn" id="backBtn">
+        <span class="material-icons">arrow_back</span>
+      </button>
+      
+      <h3 id="favoritesTitle">
+        <span class="material-icons" style="vertical-align: middle; margin-left: 5px;">bookmark</span>
+        النصائح المفضلة
+      </h3>
+      <div class="favorites-list" id="favoritesList">
+        <!-- سيتم ملؤها ديناميكياً -->
+      </div>
+      <div class="no-favorites" id="noFavorites">
+        <span class="material-icons" style="font-size: 50px; margin-bottom: 15px;">bookmark_border</span>
+        <p>لا توجد نصائح في المفضلة حتى الآن</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer id="footerText">منصة النصائح الشطرنجية © 2025 - جميع الحقوق محفوظة</footer>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+  <span class="material-icons" id="toastIcon">check_circle</span>
+  <span id="toastMessage"></span>
+</div>
+
+<script>
+// نصوص الترجمة
+const translations = {
+  en: {
+    pageTitle: "Chess Tips",
+    pageSubtitle: "Get tips to improve your chess skills - one tip at a time",
+    searchPlaceholder: "Search tips...",
+    noResultsTitle: "No results found",
+    noResultsText: "We couldn't find any tips matching your search. Try different keywords.",
+    favoritesTitle: "Favorite Tips",
+    noFavoritesText: "No favorite tips yet",
+    footerText: "Chess Tips Platform © 2025 - All rights reserved",
+    toastAdded: "Added to favorites",
+    toastRemoved: "Removed from favorites",
+    toastCopied: "Tip copied to clipboard",
+    toastFailed: "Failed to copy tip",
+    toastShared: "Tip link copied to clipboard",
+    categories: {
+      "اقتباس": "Quote",
+      "استراتيجية": "Strategy",
+      "تكتيك": "Tactic",
+      "افتتاحية": "Opening",
+      "نهاية": "Endgame",
+      "عام": "General",
+      "حكمة": "Wisdom",
+      "تحفيز": "Motivation",
+      "تدريب": "Training",
+      "نفسية": "Psychology"
+    }
+  },
+  ar: {
+    pageTitle: "نصائح شطرنجية",
+    pageSubtitle: "احصل على نصائح لتحسين مهاراتك الشطرنجية - نصيحة واحدة في كل مرة",
+    searchPlaceholder: "ابحث في النصائح...",
+    noResultsTitle: "لا توجد نتائج",
+    noResultsText: "لم نتمكن من العثور على نصائح تطابق بحثك. حاول بكلمات أخرى.",
+    favoritesTitle: "النصائح المفضلة",
+    noFavoritesText: "لا توجد نصائح في المفضلة حتى الآن",
+    footerText: "منصة النصائح الشطرنجية © 2025 - جميع الحقوق محفوظة",
+    toastAdded: "تمت الإضافة إلى المفضلة",
+    toastRemoved: "تمت الإزالة من المفضلة",
+    toastCopied: "تم نسخ النصيحة إلى الحافظة",
+    toastFailed: "فشل نسخ النصيحة",
+    toastShared: "تم نسخ رابط النصيحة إلى الحافظة",
+    categories: {
+      "اقتباس": "اقتباس",
+      "استراتيجية": "استراتيجية",
+      "تكتيك": "تكتيك",
+      "افتتاحية": "افتتاحية",
+      "نهاية": "نهاية",
+      "عام": "عام",
+      "حكمة": "حكمة",
+      "تحفيز": "تحفيز",
+      "تدريب": "تدريب",
+      "نفسية": "نفسية"
+    }
+  }
+};
+
+// متغيرات التطبيق
+let currentLang = localStorage.getItem('lang') || 'ar';
+let currentTipIndex = 0;
+let allTips = [];
+let filteredTips = [];
+let favorites = JSON.parse(localStorage.getItem('chessFavorites')) || [];
+let showingFavorites = false;
+let activeCategory = "all";
+let categories = new Set();
+
+// تهيئة الصفحة
+document.addEventListener('DOMContentLoaded', async () => {
+  setTimeout(() => document.body.classList.add('loaded'), 150);
+  
+  // تعيين اللغة
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  
+  // تحديث النصوص حسب اللغة
+  updateTexts();
+  
+  // تحميل النصائح من ملف JSON
+  await loadTipsFromJSON();
+  
+  if (allTips.length > 0) {
+    // إنشاء قائمة الفئات
+    createCategoryFilters();
+    filteredTips = [...allTips];
+    
+    // التحقق مما إذا كان هناك معلمة tip في الرابط
+    const urlParams = new URLSearchParams(window.location.search);
+    const tipParam = urlParams.get('tip');
+    
+    if (tipParam) {
+      // تحميل النصيحة المحددة بالرقم
+      loadSpecificTip(parseInt(tipParam));
+    } else {
+      // تحميل نصيحة عشوائية
+      loadRandomTip();
+    }
+  } else {
+    showNoResults(true);
+  }
+  
+  // إضافة مستمعات الأحداث
+  document.getElementById('searchInput').addEventListener('input', searchTips);
+  document.getElementById('nextTipBtn').addEventListener('click', loadRandomTip);
+  document.getElementById('favoriteBtn').addEventListener('click', toggleFavorite);
+  document.getElementById('copyBtn').addEventListener('click', copyTip);
+  document.getElementById('shareBtn').addEventListener('click', shareTip);
+  document.getElementById('favoritesToggleBtn').addEventListener('click', toggleFavoritesView);
+  document.getElementById('backBtn').addEventListener('click', backToTips);
+  
+  // تحديث عداد المفضلة
+  updateFavoritesBadge();
+  
+  // عرض المفضلة إذا كانت موجودة
+  if (favorites.length > 0) {
+    renderFavorites();
+  }
+});
+
+// تحديث النصوص حسب اللغة
+function updateTexts() {
+  const t = translations[currentLang];
+  
+  document.getElementById('pageTitle').textContent = t.pageTitle;
+  document.getElementById('pageSubtitle').textContent = t.pageSubtitle;
+  document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+  document.getElementById('favoritesTitle').innerHTML = `
+    <span class="material-icons" style="vertical-align: middle; margin-left: 5px;">bookmark</span>
+    ${t.favoritesTitle}
+  `;
+  document.getElementById('noFavorites').innerHTML = `
+    <span class="material-icons" style="font-size: 50px; margin-bottom: 15px;">bookmark_border</span>
+    <p>${t.noFavoritesText}</p>
+  `;
+  document.getElementById('footerText').textContent = t.footerText;
+  
+  // تحديث زر العودة
+  document.getElementById('backBtn').innerHTML = `
+    <span class="material-icons">arrow_back</span>
+  `;
+  
+  // تحديث نص عدم وجود نتائج
+  const noResults = document.getElementById('noResults');
+  noResults.innerHTML = `
+    <span class="material-icons" style="font-size: 60px; margin-bottom: 15px;">search_off</span>
+    <h3>${t.noResultsTitle}</h3>
+    <p>${t.noResultsText}</p>
+  `;
+  
+  // تحديث عناوين الأزرار
+  document.getElementById('nextTipBtn').title = currentLang === 'ar' ? 'نصيحة جديدة' : 'New tip';
+  document.getElementById('favoriteBtn').title = currentLang === 'ar' ? 'إضافة إلى المفضلة' : 'Add to favorites';
+  document.getElementById('copyBtn').title = currentLang === 'ar' ? 'نسخ النصيحة' : 'Copy tip';
+  document.getElementById('shareBtn').title = currentLang === 'ar' ? 'مشاركة النصيحة' : 'Share tip';
+  document.getElementById('favoritesToggleBtn').title = currentLang === 'ar' ? 'عرض المفضلة' : 'Show favorites';
+}
+
+// إنشاء أزرار تصفية الفئات
+function createCategoryFilters() {
+  const filterContainer = document.getElementById('filterButtons');
+  const t = translations[currentLang];
+  
+  // جمع الفئات الفريدة من النصائح
+  categories = new Set(allTips.map(tip => tip.category || "عام"));
+  
+  let buttonsHTML = `
+    <button class="filter-btn active" data-category="all">${currentLang === 'ar' ? 'الكل' : 'All'}</button>
+  `;
+  
+  categories.forEach(category => {
+    // ترجمة اسم الفئة إذا لزم الأمر
+    const categoryName = t.categories[category] || category;
+    buttonsHTML += `
+      <button class="filter-btn" data-category="${category}">${categoryName}</button>
+    `;
+  });
+  
+  filterContainer.innerHTML = buttonsHTML;
+  
+  // إضافة مستمعات الأحداث لأزرار التصفية
+  filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // إزالة النشاط من جميع الأزرار
+      filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      
+      // إضافة النشاط للزر المضغوط
+      this.classList.add('active');
+      
+      // تصفية النصائح حسب الفئة
+      const category = this.getAttribute('data-category');
+      activeCategory = category;
+      
+      if (category === 'all') {
+        filteredTips = [...allTips];
+      } else {
+        filteredTips = allTips.filter(tip => tip.category === category);
+      }
+      
+      // البحث الحالي إذا كان هناك نص في مربع البحث
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      if (searchTerm) {
+        filteredTips = filteredTips.filter(tip => 
+          tip.tip.toLowerCase().includes(searchTerm) || 
+          tip.category.toLowerCase().includes(searchTerm)
+        );
+      }
+      
+      if (filteredTips.length > 0) {
+        currentTipIndex = 0;
+        displayTip(0);
+        showNoResults(false);
+      } else {
+        showNoResults(true);
+      }
+    });
+  });
+}
+
+// تحميل النصائح من ملف JSON
+async function loadTipsFromJSON() {
+  try {
+    const response = await fetch(`${currentLang}/tips.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load tips: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    // تحليل النصائح من الملف (تنسيقات مختلفة ممكنة)
+    allTips = parseTipsFromJSON(data);
+    
+    console.log(`Loaded ${allTips.length} tips for ${currentLang}`);
+  } catch (error) {
+    console.error('Error loading tips:', error);
+    
+    // استخدام بيانات افتراضية في حالة الفشل
+    allTips = getDefaultTips();
+  }
+}
+
+// تحليل النصائح من بيانات JSON
+function parseTipsFromJSON(data) {
+  const tips = [];
+  
+  // إذا كان المصفوفة تحتوي على نصوص فقط
+  if (Array.isArray(data) && typeof data[0] === 'string') {
+    data.forEach((tipText, index) => {
+      // استخراج الفئة من النص (إذا كان يحتوي على أيقونة أو مؤشر)
+      let category = "اقتباس"; // افتراضياً
+      let tip = tipText;
+      
+      // محاولة تحديد الفئة من النص
+      if (tipText.includes('♚') || tipText.includes('♔') || tipText.includes('ملك')) {
+        category = "حكمة";
+      } else if (tipText.includes('♛') || tipText.includes('♕') || tipText.includes('ملكة')) {
+        category = "استراتيجية";
+      } else if (tipText.includes('♜') || tipText.includes('♖') || tipText.includes('قلعة')) {
+        category = "تكتيك";
+      } else if (tipText.includes('♝') || tipText.includes('♗') || tipText.includes('أسقف')) {
+        category = "افتتاحية";
+      } else if (tipText.includes('♞') || tipText.includes('♘') || tipText.includes('حصان')) {
+        category = "تدريب";
+      } else if (tipText.includes('♟') || tipText.includes('♙') || tipText.includes('بيدق')) {
+        category = "نهاية";
+      } else if (tipText.includes('فوز') || tipText.includes('خسارة') || tipText.includes('نتيجة')) {
+        category = "نفسية";
+      } else if (tipText.includes('-') || tipText.includes('–')) {
+        category = "اقتباس";
+      } else {
+        category = "عام";
+      }
+      
+      tips.push({
+        id: `${currentLang}_${index}`,
+        tip: tip,
+        category: category,
+        lang: currentLang,
+        tipNumber: index + 1
+      });
+    });
+  }
+  // إذا كان المصفوفة تحتوي على كائنات
+  else if (Array.isArray(data) && typeof data[0] === 'object') {
+    data.forEach((tipObj, index) => {
+      tips.push({
+        id: `${currentLang}_${index}`,
+        tip: tipObj.tip || tipObj.text || "",
+        category: tipObj.category || "عام",
+        lang: currentLang,
+        tipNumber: index + 1
+      });
+    });
+  }
+  
+  return tips;
+}
+
+// بيانات افتراضية في حالة عدم وجود ملف JSON
+function getDefaultTips() {
+  const defaultTips = {
+    ar: [
+      { id: "ar_0", tip: "♚ لا يوجد فوز بدون خطة. – نيمزوفيتش", category: "اقتباس", lang: "ar", tipNumber: 1 },
+      { id: "ar_1", tip: "الشطرنج اختبار للصبر والذكاء. – كاربوف", category: "حكمة", lang: "ar", tipNumber: 2 },
+      { id: "ar_2", tip: "♞ الحصان يحب الظلام. – تال", category: "تكتيك", lang: "ar", tipNumber: 3 },
+      { id: "ar_3", tip: "♝ الأسقف يعيش في الضوء. – كاربوف", category: "افتتاحية", lang: "ar", tipNumber: 4 },
+      { id: "ar_4", tip: "كل نقلة تُخبر قصة. – فيشر", category: "حكمة", lang: "ar", tipNumber: 5 },
+      { id: "ar_5", tip: "♜ القلاع لا تخاف من أحد، فقط من الإهمال. – كاسباروف", category: "استراتيجية", lang: "ar", tipNumber: 6 },
+      { id: "ar_6", tip: "♚ نهاية المباراة تُظهر من هو اللاعب الحقيقي. – كاربوف", category: "نفسية", lang: "ar", tipNumber: 7 },
+      { id: "ar_7", tip: "افتح بقطعك ببطء وثبات. لا تخرج كل قطعك دفعة واحدة دون خطة.", category: "افتتاحية", lang: "ar", tipNumber: 8 },
+      { id: "ar_8", tip: "تحكم في مركز الرقعة، حيث تمنحك القطع المركزية مرونة أكبر وسيطرة على اللعب.", category: "استراتيجية", lang: "ar", tipNumber: 9 },
+      { id: "ar_9", tip: "حافظ على أمن ملكك. قلع مبكراً وتأكد من أن الملك محمي من الهجمات.", category: "دفاع", lang: "ar", tipNumber: 10 }
+    ],
+    en: [
+      { id: "en_0", tip: "♚ There is no victory without a plan. – Nimzowitsch", category: "Quote", lang: "en", tipNumber: 1 },
+      { id: "en_1", tip: "Chess is a test of patience and intelligence. – Karpov", category: "Wisdom", lang: "en", tipNumber: 2 },
+      { id: "en_2", tip: "♞ The knight loves darkness. – Tal", category: "Tactic", lang: "en", tipNumber: 3 },
+      { id: "en_3", tip: "♝ The bishop lives in light. – Karpov", category: "Opening", lang: "en", tipNumber: 4 },
+      { id: "en_4", tip: "Every move tells a story. – Fischer", category: "Wisdom", lang: "en", tipNumber: 5 },
+      { id: "en_5", tip: "♜ Rooks fear no one, only negligence. – Kasparov", category: "Strategy", lang: "en", tipNumber: 6 },
+      { id: "en_6", tip: "♚ The end of the game shows who the real player is. – Karpov", category: "Psychology", lang: "en", tipNumber: 7 },
+      { id: "en_7", tip: "Develop your pieces slowly and steadily. Don't bring out all your pieces at once without a plan.", category: "Opening", lang: "en", tipNumber: 8 },
+      { id: "en_8", tip: "Control the center of the board, as central pieces give you greater flexibility and control over the game.", category: "Strategy", lang: "en", tipNumber: 9 },
+      { id: "en_9", tip: "Keep your king safe. Castle early and ensure the king is protected from attacks.", category: "Defense", lang: "en", tipNumber: 10 }
+    ]
+  };
+  
+  return defaultTips[currentLang] || [];
+}
+
+// تحميل نصيحة عشوائية
+function loadRandomTip() {
+  showingFavorites = false;
+  document.getElementById('favoritesSection').style.display = 'none';
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('searchInput').value = '';
+  
+  if (filteredTips.length === 0) {
+    showNoResults(true);
+    return;
+  }
+  
+  showNoResults(false);
+  currentTipIndex = Math.floor(Math.random() * filteredTips.length);
+  
+  // تطبيق أنيميشن
+  const tipContentEl = document.getElementById('tipContent');
+  tipContentEl.classList.add('exit-left');
+  
+  setTimeout(() => {
+    tipContentEl.classList.remove('exit-left');
+    tipContentEl.classList.add('enter-right');
+    displayTip(currentTipIndex);
+    
+    setTimeout(() => {
+      tipContentEl.classList.remove('enter-right');
+    }, 400);
+  }, 200);
+  
+  // أنيميشن للأيقونة
+  const icon = document.getElementById('nextTipBtn').querySelector('.material-icons');
+  icon.classList.add('spin');
+  setTimeout(() => icon.classList.remove('spin'), 600);
+}
+
+// تحميل نصيحة محددة بالرقم
+function loadSpecificTip(tipNumber) {
+  showingFavorites = false;
+  document.getElementById('favoritesSection').style.display = 'none';
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('searchInput').value = '';
+  
+  if (filteredTips.length === 0) {
+    showNoResults(true);
+    return;
+  }
+  
+  showNoResults(false);
+  
+  // البحث عن النصيحة بالرقم المحدد
+  const tipIndex = filteredTips.findIndex(tip => tip.tipNumber === tipNumber);
+  
+  if (tipIndex !== -1) {
+    currentTipIndex = tipIndex;
+  } else {
+    // إذا لم توجد النصيحة بالرقم المحدد، نستخدم رقم عشوائي
+    currentTipIndex = Math.floor(Math.random() * filteredTips.length);
+  }
+  
+  displayTip(currentTipIndex);
+}
+
+// عرض نصيحة محددة
+function displayTip(index) {
+  const tip = filteredTips[index];
+  
+  // تحديث النص
+  document.getElementById('tipContent').textContent = tip.tip;
+  
+  // تحديث الفئة والرقم
+  const category = translations[currentLang].categories[tip.category] || tip.category;
+  document.getElementById('tipCategory').textContent = category;
+  document.getElementById('tipIndex').textContent = `#${tip.tipNumber}`;
+  
+  updateFavoriteButton();
+}
+
+// البحث في النصائح
+function searchTips() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const searchResults = document.getElementById('searchResults');
+  
+  if (!searchTerm) {
+    searchResults.style.display = 'none';
+    showNoResults(false);
+    return;
+  }
+  
+  // البحث في جميع النصائح
+  let searchResultsList = allTips.filter(tip =>
+    tip.tip.toLowerCase().includes(searchTerm) ||
+    tip.category.toLowerCase().includes(searchTerm)
+  );
+  
+  if (searchResultsList.length > 0) {
+    displaySearchResults(searchResultsList);
+    showNoResults(false);
+  } else {
+    displaySearchResults([]);
+    showNoResults(true);
+  }
+}
+
+// عرض نتائج البحث
+function displaySearchResults(results) {
+  const searchResultsEl = document.getElementById('searchResults');
+  const t = translations[currentLang];
+  
+  // إزالة العناصر القديمة
+  const oldItems = searchResultsEl.querySelectorAll('.search-result-item');
+  oldItems.forEach(item => {
+    item.classList.remove('show');
+    item.classList.add('hide');
+    setTimeout(() => item.remove(), 300);
+  });
+  
+  if (results.length === 0) {
+    searchResultsEl.innerHTML = `
+      <div class="no-search-results">
+        <span class="material-icons" style="font-size: 40px; margin-bottom: 10px;">search_off</span>
+        <p>${currentLang === 'ar' ? 'لا توجد نتائج مطابقة' : 'No matching results'}</p>
+      </div>
+    `;
+    searchResultsEl.style.display = 'block';
+    return;
+  }
+  
+  searchResultsEl.style.display = 'block';
+  
+  results.slice(0, 10).forEach((tip, index) => {
+    const category = t.categories[tip.category] || tip.category;
+    const shortTip = tip.tip.length > 100 ? tip.tip.substring(0, 100) + '...' : tip.tip;
+    
+    const item = document.createElement('div');
+    item.classList.add('search-result-item', 'hide');
+    item.setAttribute('data-index', index);
+    item.setAttribute('data-tip-id', tip.id);
+    
+    item.innerHTML = `
+      <div class="search-result-tip">${shortTip}</div>
+      <div class="search-result-category">${category}</div>
+    `;
+    
+    searchResultsEl.appendChild(item);
+    
+    setTimeout(() => {
+      item.classList.remove('hide');
+      item.classList.add('show');
+    }, index * 50);
+    
+    item.addEventListener('click', function() {
+      const tipId = this.getAttribute('data-tip-id');
+      selectSearchResult(tipId);
+    });
+  });
+}
+
+// اختيار نتيجة من البحث
+function selectSearchResult(tipId) {
+  document.getElementById('searchResults').style.display = 'none';
+  document.getElementById('searchInput').value = '';
+  
+  const tip = allTips.find(t => t.id === tipId);
+  if (!tip) return;
+  
+  const tipIndex = filteredTips.findIndex(t => t.id === tipId);
+  
+  if (tipIndex !== -1) {
+    currentTipIndex = tipIndex;
+    displayTip(tipIndex);
+  } else {
+    document.getElementById('tipContent').textContent = tip.tip;
+    const category = translations[currentLang].categories[tip.category] || tip.category;
+    document.getElementById('tipCategory').textContent = category;
+    document.getElementById('tipIndex').textContent = `#${tip.tipNumber}`;
+    updateFavoriteButton();
+    showNoResults(false);
+  }
+  
+  showingFavorites = false;
+  document.getElementById('favoritesSection').style.display = 'none';
+}
+
+// إخفاء نتائج البحث عند النقر خارجها
+document.addEventListener('click', function(event) {
+  const searchResults = document.getElementById('searchResults');
+  const searchInput = document.getElementById('searchInput');
+  
+  if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+    searchResults.style.display = 'none';
+  }
+});
+
+// إضافة/إزالة من المفضلة
+function toggleFavorite() {
+  const currentTip = filteredTips[currentTipIndex];
+  
+  const existingIndex = favorites.findIndex(fav => fav.id === currentTip.id);
+  
+  if (existingIndex === -1) {
+    // إضافة للمفضلة
+    favorites.push(currentTip);
+    showToast(translations[currentLang].toastAdded, 'check_circle');
+    
+    // أنيميشن للزر
+    const icon = document.getElementById('favoriteBtn').querySelector('.material-icons');
+    icon.classList.add('pop');
+    setTimeout(() => icon.classList.remove('pop'), 300);
+  } else {
+    // إزالة من المفضلة
+    favorites.splice(existingIndex, 1);
+    showToast(translations[currentLang].toastRemoved, 'star_border');
+  }
+  
+  // حفظ التحديثات
+  localStorage.setItem('chessFavorites', JSON.stringify(favorites));
+  updateFavoriteButton();
+  updateFavoritesBadge();
+  
+  // تحديث قائمة المفضلة إذا كانت معروضة
+  if (showingFavorites) {
+    renderFavorites();
+  }
+}
+
+// تحديث زر المفضلة
+function updateFavoriteButton() {
+  const currentTip = filteredTips[currentTipIndex];
+  const isFavorite = favorites.some(fav => fav.id === currentTip.id);
+  const btn = document.getElementById('favoriteBtn');
+  const icon = btn.querySelector('.material-icons');
+  
+  if (isFavorite) {
+    btn.classList.add('active');
+    icon.textContent = 'star';
+  } else {
+    btn.classList.remove('active');
+    icon.textContent = 'star_border';
+  }
+}
+
+// تحديث عداد المفضلة
+function updateFavoritesBadge() {
+  const currentLangFavorites = favorites.filter(fav => fav.lang === currentLang);
+  const badgeElement = document.getElementById('favoriteBadge');
+  badgeElement.textContent = currentLangFavorites.length;
+}
+
+// نسخ النصيحة
+function copyTip() {
+  const tipText = document.getElementById('tipContent').textContent;
+  
+  navigator.clipboard.writeText(tipText)
+    .then(() => {
+      showToast(translations[currentLang].toastCopied, 'content_copy');
+      
+      // أنيميشن للزر
+      const icon = document.getElementById('copyBtn').querySelector('.material-icons');
+      icon.classList.add('shake');
+      setTimeout(() => {
+        icon.classList.remove('shake');
+      }, 400);
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+      showToast(translations[currentLang].toastFailed, 'error');
+    });
+}
+
+// مشاركة النصيحة
+function shareTip() {
+  const currentTip = filteredTips[currentTipIndex];
+  const tipNumber = currentTip.tipNumber;
+  
+  // إنشاء الرابط بنظام Swiss-System
+  const shareUrl = `swiss-system://tips?tip=${tipNumber}`;
+  
+  // نسخ الرابط إلى الحافظة
+  navigator.clipboard.writeText(shareUrl)
+    .then(() => {
+      showToast(translations[currentLang].toastShared, 'share');
+      
+      // أنيميشن للزر
+      const icon = document.getElementById('shareBtn').querySelector('.material-icons');
+      icon.classList.add('bounce');
+      setTimeout(() => {
+        icon.classList.remove('bounce');
+      }, 500);
+    })
+    .catch(err => {
+      console.error('Failed to copy link:', err);
+      showToast(translations[currentLang].toastFailed, 'error');
+    });
+}
+
+// التبديل بين عرض النصيحة والعرض المفضلة
+function toggleFavoritesView() {
+  showingFavorites = !showingFavorites;
+  
+  if (showingFavorites) {
+    document.getElementById('favoritesSection').style.display = 'block';
+    document.querySelector('.tip-card').style.display = 'none';
+    document.getElementById('searchInput').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+    document.querySelector('.filter-buttons').style.display = 'none';
+    renderFavorites();
+    
+    // أنيميشن للزر
+    const icon = document.getElementById('favoritesToggleBtn').querySelector('.material-icons');
+    icon.classList.add('bounce');
+    setTimeout(() => icon.classList.remove('bounce'), 500);
+  } else {
+    document.getElementById('favoritesSection').style.display = 'none';
+    document.querySelector('.tip-card').style.display = 'block';
+    document.getElementById('searchInput').style.display = 'block';
+    document.querySelector('.filter-buttons').style.display = 'flex';
+  }
+}
+
+// زر العودة للنصائح
+function backToTips() {
+  showingFavorites = false;
+  document.getElementById('favoritesSection').style.display = 'none';
+  document.querySelector('.tip-card').style.display = 'block';
+  document.getElementById('searchInput').style.display = 'block';
+  document.querySelector('.filter-buttons').style.display = 'flex';
+}
+
+// عرض النصائح المفضلة
+function renderFavorites() {
+  const favoritesList = document.getElementById('favoritesList');
+  const noFavorites = document.getElementById('noFavorites');
+  
+  // فقط نصائح اللغة الحالية
+  const currentLangFavorites = favorites.filter(fav => fav.lang === currentLang);
+  
+  if (currentLangFavorites.length === 0) {
+    favoritesList.innerHTML = '';
+    noFavorites.style.display = 'block';
+    return;
+  }
+  
+  noFavorites.style.display = 'none';
+  
+  const favoritesHTML = currentLangFavorites.map((fav, index) => {
+    const category = translations[currentLang].categories[fav.category] || fav.category;
+    const tipNumber = fav.tipNumber;
+    
+    return `
+      <div class="favorite-item" data-index="${index}">
+        <button class="remove-favorite" onclick="removeFavorite('${fav.id}', event)">
+          <span class="material-icons">close</span>
+        </button>
+        <div class="favorite-tip">${fav.tip}</div>
+        <div class="favorite-category">${category} • نصيحة #${tipNumber}</div>
+      </div>
+    `;
+  }).join('');
+  
+  favoritesList.innerHTML = favoritesHTML;
+  
+  document.querySelectorAll('.favorite-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      if (!e.target.closest('.remove-favorite')) {
+        const index = parseInt(this.getAttribute('data-index'));
+        showFavoriteAsTip(index);
+      }
+    });
+  });
+}
+
+// إزالة من المفضلة
+function removeFavorite(id, event) {
+  event.stopPropagation();
+  
+  const index = favorites.findIndex(fav => fav.id === id);
+  if (index !== -1) {
+    favorites.splice(index, 1);
+    localStorage.setItem('chessFavorites', JSON.stringify(favorites));
+    renderFavorites();
+    showToast(translations[currentLang].toastRemoved, 'star_border');
+    updateFavoritesBadge();
+    
+    const currentTip = filteredTips[currentTipIndex];
+    if (currentTip && currentTip.id === id) {
+      updateFavoriteButton();
+    }
+  }
+}
+
+// عرض نصيحة مفضلة كنصيحة حالية
+function showFavoriteAsTip(favIndex) {
+  const favorite = favorites[favIndex];
+  
+  // البحث عن النصيحة في filteredTips
+  const tipIndex = filteredTips.findIndex(tip => tip.id === favorite.id);
+  
+  if (tipIndex !== -1) {
+    currentTipIndex = tipIndex;
+    
+    // أنيميشن عند التبديل
+    const tipContentEl = document.getElementById('tipContent');
+    tipContentEl.classList.add('exit-left');
+    
+    setTimeout(() => {
+      tipContentEl.classList.remove('exit-left');
+      tipContentEl.classList.add('enter-right');
+      
+      displayTip(tipIndex);
+      backToTips();
+      
+      setTimeout(() => {
+        tipContentEl.classList.remove('enter-right');
+      }, 400);
+    }, 200);
+  } else {
+    // إذا لم تكن في filteredTips، عرضها مباشرة
+    document.getElementById('tipContent').textContent = favorite.tip;
+    const category = translations[currentLang].categories[favorite.category] || favorite.category;
+    document.getElementById('tipCategory').textContent = category;
+    const tipNumber = favorite.tipNumber;
+    document.getElementById('tipIndex').textContent = `#${tipNumber} (مفضلة)`;
+    updateFavoriteButton();
+    backToTips();
+  }
+}
+
+// عرض/إخفاء رسالة عدم وجود نتائج
+function showNoResults(show) {
+  document.getElementById('noResults').style.display = show ? 'block' : 'none';
+  document.querySelector('.tip-card').style.display = show ? 'none' : 'block';
+}
+
+// عرض إشعار
+function showToast(message, icon = 'info') {
+  const toast = document.getElementById('toast');
+  const toastIcon = document.getElementById('toastIcon');
+  const toastMessage = document.getElementById('toastMessage');
+  
+  toastIcon.textContent = icon;
+  toastMessage.textContent = message;
+  
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+// ================= Deep Link Support =================
+function openTipById(tipNumber) {
+  const num = parseInt(tipNumber);
+  if (isNaN(num)) return;
+  
+  // تأكد أن النصائح محملة
+  if (!allTips || allTips.length === 0) {
+    console.warn("Tips not loaded yet");
+    return;
+  }
+  
+  // البحث عن النصيحة برقمها
+  const tipIndex = allTips.findIndex(t => t.tipNumber === num);
+  
+  if (tipIndex !== -1) {
+    // إلغاء عرض المفضلة والبحث
+    showingFavorites = false;
+    document.getElementById('favoritesSection').style.display = 'none';
+    document.getElementById('searchResults').style.display = 'none';
+    document.getElementById('searchInput').value = '';
+    
+    // عرض النصيحة المطلوبة
+    filteredTips = [...allTips];
+    currentTipIndex = tipIndex;
+    displayTip(currentTipIndex);
+    showNoResults(false);
+    
+    // أنيميشن خفيف
+    const tipContentEl = document.getElementById('tipContent');
+    tipContentEl.classList.add('enter-right');
+    setTimeout(() => {
+      tipContentEl.classList.remove('enter-right');
+    }, 400);
+  } else {
+    console.warn("Tip not found:", tipNumber);
+    loadRandomTip();
+  }
+}
+</script>
+</body>
+</html>

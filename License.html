@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Tournament Platform - User License Agreement</title>
+<style>
+:root{
+  --dark:#64442c; --light:#f0d4ac; --bg:#3a2719;
+  --card:#4b3422; --panel:#5a3d27; --text:#f7e8d3;
+  --muted:#d8c0a1; --accent:#f0d4ac;
+  
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:system-ui,Segoe UI,Arial;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:30px;
+  line-height:1.7;
+  background-image: 
+      radial-gradient(circle at 20% 80%, rgba(240,212,172,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,212,172,0.12) 0%, transparent 50%);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .9s ease, transform 1s ease;
+}
+
+body.loaded{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+h2{
+  font-size:22px;
+  margin-top:30px;
+  margin-bottom:12px;
+  color:var(--accent);
+}
+
+p, li{
+  margin-bottom:12px;
+}
+
+ul{margin-left:20px;}
+
+.container{max-width:900px;margin:0 auto;}
+
+.card {
+  background: linear-gradient(180deg, rgba(90,61,39,0.4), rgba(58,39,25,0.4));
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+footer{
+  margin-top:40px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>User License Agreement</h1>
+
+    <p><strong>Last Updated: 2025</strong></p>
+
+    <h2>1. License Grant</h2>
+    <p>
+      The developer grants you a non-exclusive, non-transferable, revocable license to use the Swiss Chess Tournaments App (“the App”) 
+      solely for personal, non-commercial purposes in accordance with this Agreement.
+    </p>
+
+    <h2>2. Restrictions</h2>
+    <ul>
+      <li>You may NOT copy, modify, distribute, sell, sublicense, or reverse-engineer any part of the App.</li>
+      <li>You may NOT use the App for commercial purposes without explicit written permission from the developer.</li>
+      <li>You may NOT remove or alter any proprietary notices, trademarks, or copyright statements in the App.</li>
+    </ul>
+
+    <h2>3. Ownership</h2>
+    <p>
+      All rights, title, and interest in the App, including all intellectual property rights, remain solely with the developer. 
+      This Agreement does not grant you any ownership rights.
+    </p>
+
+    <h2>4. Updates and Maintenance</h2>
+    <p>
+      The developer may provide updates, upgrades, or modifications to the App at any time. 
+      Continued use of the App after updates constitutes acceptance of the updated terms.
+    </p>
+
+    <h2>5. Termination</h2>
+    <p>
+      This License Agreement is effective until terminated. The developer may terminate this Agreement immediately if you violate any terms. 
+      Upon termination, you must uninstall and permanently delete the App and all copies from your devices.
+    </p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>
+      The App is provided “AS IS” and without warranty of any kind. The developer is not liable for any direct, indirect, incidental, or consequential damages 
+      resulting from use or inability to use the App.
+    </p>
+
+    <h2>7. Governing Law</h2>
+    <p>
+      This License Agreement is governed by applicable local laws. Users are responsible for compliance with all relevant regulations in their region.
+    </p>
+
+    <h2>8. Contact Information</h2>
+    <p>
+      For inquiries regarding this User License Agreement, please contact the developer directly.
+    </p>
+
+    <footer>© 2025 Swiss Chess Tournaments App. All rights reserved. </footer>
+    
+  </div>
+</div>
+
+<script>
+// Animate body on load
+window.addEventListener("load", ()=>{
+  document.body.classList.add("loaded");
+});
+</script>
+</body>
+</html>

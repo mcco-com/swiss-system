@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- داخل <head> بعد الـ viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Tournament Platform - Terms of Use</title>
+<style>
+:root{
+  --dark:#64442c; --light:#f0d4ac; --bg:#3a2719;
+  --card:#4b3422; --panel:#5a3d27; --text:#f7e8d3;
+  --muted:#d8c0a1; --accent:#f0d4ac;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:system-ui,Segoe UI,Arial;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:30px;
+  line-height:1.7;
+  background-image: 
+      radial-gradient(circle at 20% 80%, rgba(240,212,172,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,212,172,0.12) 0%, transparent 50%);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .9s ease, transform 1s ease;
+}
+
+body.loaded{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+h2{
+  font-size:22px;
+  margin-top:30px;
+  margin-bottom:12px;
+  color:var(--accent);
+}
+
+p, li{
+  margin-bottom:12px;
+}
+
+ul{margin-left:20px;}
+
+.container{max-width:900px;margin:0 auto;}
+
+.card {
+  background: linear-gradient(180deg, rgba(90,61,39,0.4), rgba(58,39,25,0.4));
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+footer{
+  margin-top:40px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+}
+.page-exit-back {
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform .45s ease, opacity .45s ease, filter .45s ease;
+}
+.page-exit-back.active {
+  opacity: 0;
+  transform: translateX(40px);
+  filter: blur(6px);
+}
+
+/* دخول من اليسار عند فتح الصفحة بسبب الرجوع */
+body.back-enter {
+  opacity: 0;
+  transform: translateX(-40px);
+  filter: blur(6px);
+  transition: transform .55s ease, opacity .55s ease, filter .55s ease;
+}
+body.back-enter.loaded {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+} 
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>Terms of Use</h1>
+
+    <p><strong>Last Updated: 2025</strong></p>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>
+      By downloading, installing, or using the Swiss Chess Tournaments application (“the App”), 
+      you acknowledge that you have read, understood, and agree to be fully bound by these Terms of Use. 
+      If you do not agree with any part of these terms, you must stop using the App immediately.
+    </p>
+
+    <h2>2. Description of Service</h2>
+    <p>
+      The App provides tools for creating, organizing, and managing chess tournaments using the Swiss System. 
+      Features may include round generation, player pairing, ranking calculation, result tracking, 
+      and local data storage.  
+      The App does not represent an official federation, does not certify titles, 
+      and is not affiliated with any national or international chess organization.
+    </p>
+
+    <h2>3. User Responsibilities</h2>
+    <ul>
+      <li><strong>Accuracy of Information:</strong> You are solely responsible for the accuracy of all data entered into the App, including player names, match results, and tournament configurations.</li>
+      <li><strong>Permitted Use:</strong> You agree NOT to use the App for submitting false results, impersonation, illegal activities, or attempting to hack, reverse-engineer, or tamper with the App.</li>
+    </ul>
+
+    <h2>4. Data Storage and Privacy</h2>
+    <p>
+      The App may store tournament data locally on your device. If cloud storage or online syncing is added in future versions, additional privacy rules will apply. The App does not collect personal data without user action. Users are responsible for ensuring that any stored data complies with local privacy regulations.
+    </p>
+
+    <h2>5. Intellectual Property</h2>
+    <p>
+      All code, interface design, graphics, algorithms, and content included in the App are protected 
+      by copyright and intellectual property laws. You are not allowed to copy, distribute, modify, or reuse any part of the App without explicit permission from the developer.
+    </p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>
+      The App is provided “AS IS” and “AS AVAILABLE,” without any warranties of any kind.  
+      The developer is not responsible for data loss, incorrect results, device issues, or any personal or financial damages arising from the use of the App.
+    </p>
+
+    <h2>7. Updates and Modifications</h2>
+    <p>
+      The developer reserves the right to update, modify, or discontinue any part of the App at any time. 
+      These Terms of Use may also be updated. Continued use of the App after updates constitutes acceptance of the new terms.
+    </p>
+
+    <h2>8. Termination of Access</h2>
+    <p>
+      The developer may restrict or terminate access to the App if the user violates any part of these Terms. Users may also stop using the App at any time by uninstalling it.
+    </p>
+
+    <h2>9. Governing Law</h2>
+    <p>
+      These Terms shall be governed and interpreted according to the applicable laws of your region. 
+      Users are responsible for compliance with all local legal requirements.
+    </p>
+
+    <h2>10. Contact Information</h2>
+    <p>
+      For questions, issues, or legal inquiries regarding these Terms of Use, you may contact the developer directly.
+    </p>
+
+    <footer>© 2025 Swiss Chess Tournaments App. All rights reserved.</footer>
+  </div>
+</div>
+
+<script>
+  (function() {
+    let handlingBack = false;
+    
+    // عند تحميل الصفحة، شغّل أنميشن دخول عادي
+    function enterPage() {
+      requestAnimationFrame(() => {
+        document.body.classList.add('loaded');
+      });
+    }
+    
+    window.addEventListener('load', function() {
+      enterPage();
+      
+      // كل تحميل صفحة يضيف pushState جديد لتتبع الرجوع
+      history.replaceState({ page: 'current' }, '', location.href);
+      history.pushState({ page: 'next' }, '', location.href);
+    });
+    
+    // التقاط حدث الرجوع
+    window.addEventListener('popstate', function(e) {
+      if (handlingBack) return;
+      handlingBack = true;
+      
+      // شغّل أنميشن خروج عكسي
+      document.body.classList.add('page-exit-back', 'active');
+      
+      // بعد الأنميشن نسمح بالرجوع الفعلي
+      setTimeout(function() {
+        handlingBack = false; // إعادة التفعيل
+        // رجوع فعلي
+        history.go(-1);
+      }, 450);
+    });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- داخل <head> بعد الـ viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Tournament Platform - Privacy Policy</title>
+<style>
+:root{
+  --dark:#64442c; --light:#f0d4ac; --bg:#3a2719;
+  --card:#4b3422; --panel:#5a3d27; --text:#f7e8d3;
+  --muted:#d8c0a1; --accent:#f0d4ac;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:system-ui,Segoe UI,Arial;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:30px;
+  line-height:1.7;
+  background-image: 
+      radial-gradient(circle at 20% 80%, rgba(240,212,172,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,212,172,0.12) 0%, transparent 50%);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .9s ease, transform 1s ease;
+}
+
+body.loaded{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+h2{
+  font-size:22px;
+  margin-top:30px;
+  margin-bottom:12px;
+  color:var(--accent);
+}
+
+p, li{
+  margin-bottom:12px;
+}
+
+ul{margin-left:20px;}
+
+.container{max-width:900px;margin:0 auto;}
+
+.card {
+  background: linear-gradient(180deg, rgba(90,61,39,0.4), rgba(58,39,25,0.4));
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+footer{
+  margin-top:40px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+}
+.page-exit-back {
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform .45s ease, opacity .45s ease, filter .45s ease;
+}
+.page-exit-back.active {
+  opacity: 0;
+  transform: translateX(40px);
+  filter: blur(6px);
+}
+
+/* دخول من اليسار عند فتح الصفحة بسبب الرجوع */
+body.back-enter {
+  opacity: 0;
+  transform: translateX(-40px);
+  filter: blur(6px);
+  transition: transform .55s ease, opacity .55s ease, filter .55s ease;
+}
+body.back-enter.loaded {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+} 
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>Privacy Policy</h1>
+
+    <p><strong>Last Updated: 2025</strong></p>
+
+    <h2>1. Introduction</h2>
+    <p>
+      Swiss system or Swiss Chess Tournaments App (“the App”) values your privacy. This Privacy Policy explains how we collect, use, and protect your personal information. 
+      By using the App, you agree to the practices described in this policy.
+    </p>
+
+    <h2>2. Information Collection</h2>
+    <ul>
+      <li><strong>Local Data:</strong> Tournament information, match results, and player names are stored locally on your device.</li>
+      <li><strong>No Personal Data Collection:</strong> The App does not collect personal information such as emails, phone numbers, or identification details unless explicitly entered for future features.</li>
+    </ul>
+
+    <h2>3. Use of Information</h2>
+    <p>
+      All data collected and stored by the App is used exclusively to provide tournament functionality and improve user experience. 
+      The developer does not share or sell any data to third parties.
+    </p>
+
+    <h2>4. Data Security</h2>
+    <p>
+      The App implements measures to protect stored data, including local device encryption and secure storage methods. 
+      However, users are responsible for device security, backups, and preventing unauthorized access.
+    </p>
+
+    <h2>5. Third-Party Services</h2>
+    <p>
+      Currently, the App does not integrate with third-party services that collect personal data. 
+      Any future integrations will be communicated in-app, and data handling will comply with privacy regulations.
+    </p>
+
+    <h2>6. Children’s Privacy</h2>
+    <p>
+      The App is not intended for children under the age of 13. The developer does not knowingly collect data from children.
+    </p>
+
+    <h2>7. User Rights</h2>
+    <p>
+      Users may delete tournament data at any time by removing it within the App or uninstalling the App. 
+      Users are responsible for maintaining personal copies of their data if desired.
+    </p>
+
+    <h2>8. Changes to this Privacy Policy</h2>
+    <p>
+      The developer reserves the right to update this Privacy Policy at any time. 
+      Users will be notified through app updates. Continued use after updates constitutes acceptance.
+    </p>
+
+    <h2>9. Contact Information</h2>
+    <p>
+      For questions regarding this Privacy Policy, please contact the developer directly.
+    </p>
+
+    <footer>© 2025 Swiss Chess Tournaments App. All rights reserved.</footer>
+  </div>
+</div>
+
+<script>
+  (function() {
+    let handlingBack = false;
+    
+    // عند تحميل الصفحة، شغّل أنميشن دخول عادي
+    function enterPage() {
+      requestAnimationFrame(() => {
+        document.body.classList.add('loaded');
+      });
+    }
+    
+    window.addEventListener('load', function() {
+      enterPage();
+      
+      // كل تحميل صفحة يضيف pushState جديد لتتبع الرجوع
+      history.replaceState({ page: 'current' }, '', location.href);
+      history.pushState({ page: 'next' }, '', location.href);
+    });
+    
+    // التقاط حدث الرجوع
+    window.addEventListener('popstate', function(e) {
+      if (handlingBack) return;
+      handlingBack = true;
+      
+      // شغّل أنميشن خروج عكسي
+      document.body.classList.add('page-exit-back', 'active');
+      
+      // بعد الأنميشن نسمح بالرجوع الفعلي
+      setTimeout(function() {
+        handlingBack = false; // إعادة التفعيل
+        // رجوع فعلي
+        history.go(-1);
+      }, 450);
+    });
+  })();
+</script>
+</body>
+</html>

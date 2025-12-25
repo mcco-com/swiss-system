@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<!-- داخل <head> بعد الـ viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة البطولات السويسرية - شروط الاستخدام</title>
+<style>
+:root{
+  --dark:#64442c; --light:#f0d4ac; --bg:#3a2719;
+  --card:#4b3422; --panel:#5a3d27; --text:#f7e8d3;
+  --muted:#d8c0a1; --accent:#f0d4ac;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:system-ui,Segoe UI,Arial;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  padding:30px;
+  line-height:1.7;
+  background-image: 
+      radial-gradient(circle at 20% 80%, rgba(240,212,172,0.18) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(240,212,172,0.12) 0%, transparent 50%);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .9s ease, transform 1s ease;
+}
+
+body.loaded{
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1{
+  font-size:32px;
+  margin-bottom:20px;
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+h2{
+  font-size:22px;
+  margin-top:30px;
+  margin-bottom:12px;
+  color:var(--accent);
+}
+
+p, li{
+  margin-bottom:12px;
+}
+
+ul{margin-left:20px;}
+
+.container{max-width:900px;margin:0 auto;}
+
+.card {
+  background: linear-gradient(180deg, rgba(90,61,39,0.4), rgba(58,39,25,0.4));
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+footer{
+  margin-top:40px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:center;
+}
+.page-exit-back {
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform .45s ease, opacity .45s ease, filter .45s ease;
+}
+.page-exit-back.active {
+  opacity: 0;
+  transform: translateX(40px);
+  filter: blur(6px);
+}
+
+/* دخول من اليسار عند فتح الصفحة بسبب الرجوع */
+body.back-enter {
+  opacity: 0;
+  transform: translateX(-40px);
+  filter: blur(6px);
+  transition: transform .55s ease, opacity .55s ease, filter .55s ease;
+}
+body.back-enter.loaded {
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+} 
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>شروط الاستخدام</h1>
+
+    <p><strong>آخر تحديث: 2025</strong></p>
+
+    <h2>1. قبول الشروط</h2>
+    <p>
+      من خلال تحميل أو تثبيت أو استخدام تطبيق البطولات السويسرية للشطرنج ("التطبيق")، 
+      فإنك تقر بأنك قد قرأت وفهمت وتوافق على الالتزام الكامل بهذه الشروط. 
+      إذا لم توافق على أي جزء من هذه الشروط، يجب عليك التوقف عن استخدام التطبيق فورًا.
+    </p>
+
+    <h2>2. وصف الخدمة</h2>
+    <p>
+      يوفر التطبيق أدوات لإنشاء وتنظيم وإدارة بطولات الشطرنج باستخدام النظام السويسري. 
+      تشمل الميزات إنشاء الجولات، ترتيب اللاعبين، حساب التصنيفات، متابعة النتائج، 
+      وتخزين البيانات محليًا.  
+      التطبيق لا يمثل اتحادًا رسميًا، ولا يصدر ألقابًا، ولا يرتبط بأي منظمة شطرنج وطنية أو دولية.
+    </p>
+
+    <h2>3. مسؤوليات المستخدم</h2>
+    <ul>
+      <li><strong>دقة المعلومات:</strong> أنت المسؤول الوحيد عن دقة جميع البيانات المدخلة في التطبيق، بما في ذلك أسماء اللاعبين، نتائج المباريات، وإعدادات البطولات.</li>
+      <li><strong>الاستخدام المسموح:</strong> توافق على عدم استخدام التطبيق لإدخال نتائج مزيفة، انتحال هوية، أنشطة غير قانونية، أو محاولة اختراق أو تعديل التطبيق بأي شكل من الأشكال.</li>
+    </ul>
+
+    <h2>4. تخزين البيانات والخصوصية</h2>
+    <p>
+      قد يقوم التطبيق بتخزين بيانات البطولات محليًا على جهازك. إذا تمت إضافة تخزين سحابي أو مزامنة عبر الإنترنت في الإصدارات المستقبلية، ستطبق قواعد خصوصية إضافية. 
+      لا يقوم التطبيق بجمع البيانات الشخصية دون تدخل المستخدم. يتحمل المستخدمون مسؤولية التأكد من أن البيانات المخزنة تتوافق مع قوانين الخصوصية المحلية.
+    </p>
+
+    <h2>5. الملكية الفكرية</h2>
+    <p>
+      جميع الأكواد، تصميم الواجهة، الرسومات، الخوارزميات، والمحتوى المدرج في التطبيق محمي بحقوق النشر وقوانين الملكية الفكرية. 
+      لا يُسمح لك بنسخ أو توزيع أو تعديل أو إعادة استخدام أي جزء من التطبيق دون إذن صريح من المطور.
+    </p>
+
+    <h2>6. تحديد المسؤولية</h2>
+    <p>
+      يُقدم التطبيق "كما هو" و"حسب توفره"، دون أي ضمانات من أي نوع.  
+      المطور غير مسؤول عن فقدان البيانات، النتائج غير الصحيحة، مشاكل الأجهزة، أو أي أضرار شخصية أو مالية ناتجة عن استخدام التطبيق.
+    </p>
+
+    <h2>7. التحديثات والتعديلات</h2>
+    <p>
+      يحتفظ المطور بالحق في تحديث أو تعديل أو إيقاف أي جزء من التطبيق في أي وقت. 
+      يمكن أيضًا تحديث شروط الاستخدام هذه، واستمرارك في استخدام التطبيق بعد التحديثات يعتبر قبولًا للشروط الجديدة.
+    </p>
+
+    <h2>8. إنهاء الوصول</h2>
+    <p>
+      قد يقوم المطور بتقييد أو إنهاء الوصول إلى التطبيق إذا خالف المستخدم أي جزء من هذه الشروط. يمكن للمستخدمين أيضًا التوقف عن استخدام التطبيق في أي وقت عن طريق إلغاء تثبيته.
+    </p>
+
+    <h2>9. القانون المعمول به</h2>
+    <p>
+      تخضع هذه الشروط وتفسر وفقًا للقوانين المعمول بها في منطقتك. 
+      يتحمل المستخدمون مسؤولية الالتزام بجميع المتطلبات القانونية المحلية.
+    </p>
+
+    <h2>10. معلومات الاتصال</h2>
+    <p>
+      لأي أسئلة أو مشكلات أو استفسارات قانونية بخصوص شروط الاستخدام هذه، يمكنك التواصل مباشرة مع المطور.
+    </p>
+
+    <footer>© 2025 تطبيق البطولات السويسرية للشطرنج. جميع الحقوق محفوظة.</footer>
+  </div>
+</div>
+
+<script>
+  (function() {
+    let handlingBack = false;
+    
+    // عند تحميل الصفحة، شغّل أنميشن دخول عادي
+    function enterPage() {
+      requestAnimationFrame(() => {
+        document.body.classList.add('loaded');
+      });
+    }
+    
+    window.addEventListener('load', function() {
+      enterPage();
+      
+      // كل تحميل صفحة يضيف pushState جديد لتتبع الرجوع
+      history.replaceState({ page: 'current' }, '', location.href);
+      history.pushState({ page: 'next' }, '', location.href);
+    });
+    
+    // التقاط حدث الرجوع
+    window.addEventListener('popstate', function(e) {
+      if (handlingBack) return;
+      handlingBack = true;
+      
+      // شغّل أنميشن خروج عكسي
+      document.body.classList.add('page-exit-back', 'active');
+      
+      // بعد الأنميشن نسمح بالرجوع الفعلي
+      setTimeout(function() {
+        handlingBack = false; // إعادة التفعيل
+        // رجوع فعلي
+        history.go(-1);
+      }, 450);
+    });
+  })();
+</script>
+</body>
+</html>
