@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>نصائح شطرنجية</title>
+<title> chess tips</title>
 <style>
 :root{
   --dark:#64442c; --light:#f0d4ac; --bg:#3a2719;
@@ -1353,7 +1353,7 @@ function shareTip() {
   const tipNumber = currentTip.tipNumber;
   
   // إنشاء الرابط بنظام Swiss-System
-  const shareUrl = `swiss-system://tips?tip=${tipNumber}`;
+  const shareUrl = `https://swiss-systemic.vercel.app/tips?tip=${tipNumber}`;
   
   // نسخ الرابط إلى الحافظة
   navigator.clipboard.writeText(shareUrl)

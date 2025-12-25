@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target":{
+      "namespace":"android_app",
+      "package_name":"com.swiss_tournament_manager.app",
+      "sha256_cert_fingerprints":[
+        "03:A7:BA:89:D0:CF:3C:E1:24:1F:74:A3:CF:8E:F0:1A:DE:74:44:7F:22:F0:E5:D7:CF:4C:BB:F2:CC"    
+      ]
+    }
+  }
+]
